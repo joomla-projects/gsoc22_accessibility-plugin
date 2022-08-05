@@ -17,7 +17,7 @@
 		<language tag="en-GB">language/en-GB/plg_system_accessibility.sys.ini</language>
 	</languages>
 	<config>
-		<fields name="params" addfieldprefix="Joomla\Component\Menus\Administrator\Field">
+		<fields name="params">
 			<fieldset name="basic">
 				<field
 					name="section"
@@ -50,6 +50,7 @@
 					new="true"
 					edit="true"
 					clear="true"
+					addfieldprefix="Joomla\Component\Menus\Administrator\Field"
 					>
 					<option value="">JOPTION_SELECT_MENU_ITEM</option>
 				</field>

@@ -10,11 +10,13 @@
  * @phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
  */
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\CMS\Router\Route;
 use Joomla\CMS\Language\Associations;
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Language\Text;
+
+
 
 /**
  * System plugin to add additional accessibility features to the administrator interface.
@@ -86,7 +88,7 @@ class PlgSystemAccessibility extends CMSPlugin
         $menuItemId = $this->getAccessibilityItemId();
 
         //generate the url to pass it to the accessibility script
-        $url = Route::link("site", "index.php?Itemid={$menuItemId}");
+        $url = Route::link('site', 'index.php?Itemid={$menuItemId}');
 
         /**
         * Add strings for translations in Javascript.
