@@ -41,6 +41,7 @@
 					<option value="false">PLG_SYSTEM_ACCESSIBILITY_EMOJIS_FALSE</option>
 				</field>
 				<field
+					addfieldprefix="Joomla\Component\Menus\Administrator\Field"
 					name="feedback_redirection_link"
 					type="modal_menu"
 					label="PLG_SYSTEM_ACCESSIBILITY_FEEDBACK_REDIRECTION_LINK"
@@ -50,7 +51,6 @@
 					new="true"
 					edit="true"
 					clear="true"
-					addfieldprefix="Joomla\Component\Menus\Administrator\Field"
 					>
 					<option value="">JOPTION_SELECT_MENU_ITEM</option>
 				</field>
