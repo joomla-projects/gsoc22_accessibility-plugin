@@ -17,7 +17,7 @@
 		<language tag="en-GB">language/en-GB/plg_system_accessibility.sys.ini</language>
 	</languages>
 	<config>
-		<fields name="params">
+		<fields name="params" addfieldprefix="Joomla\Component\Menus\Administrator\Field">
 			<fieldset name="basic">
 				<field
 					name="section"
@@ -39,6 +39,19 @@
 					>
 					<option value="true">PLG_SYSTEM_ACCESSIBILITY_EMOJIS_TRUE</option>
 					<option value="false">PLG_SYSTEM_ACCESSIBILITY_EMOJIS_FALSE</option>
+				</field>
+				<field
+					name="feedback_redirection_link"
+					type="modal_menu"
+					label="PLG_SYSTEM_ACCESSIBILITY_FEEDBACK_REDIRECTION_LINK"
+					description="PLG_SYSTEM_ACCESSIBILITY_FEEDBACK_REDIRECTION_LINK_DESC"
+					disable="separator,alias,heading,url"
+					select="true"
+					new="true"
+					edit="true"
+					clear="true"
+					>
+					<option value="">JOPTION_SELECT_MENU_ITEM</option>
 				</field>
 			</fieldset>
 		</fields>

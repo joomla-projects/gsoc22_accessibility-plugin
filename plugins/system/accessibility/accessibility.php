@@ -13,6 +13,8 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Language\Associations;
 
 /**
  * System plugin to add additional accessibility features to the administrator interface.
@@ -35,6 +37,22 @@ class PlgSystemAccessibility extends CMSPlugin
      *
      * @since   4.0.0
      */
+    private function getAccessibilityItemId()
+    {
+        $itemId = $this->params->get('feedback_redirection_link');
+
+        if ($itemId > 0 && Associations::isEnabled()) {
+            $privacyAssociated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
+            $currentLang = Factory::getLanguage()->getTag();
+
+            if (isset($privacyAssociated[$currentLang])) {
+                $itemId = $privacyAssociated[$currentLang]->id;
+            }
+        }
+
+        return $itemId;
+    }
+
     public function onBeforeCompileHead()
     {
         $section = $this->params->get('section', 'administrator');
@@ -63,6 +81,12 @@ class PlgSystemAccessibility extends CMSPlugin
 
         // Detect the current active language
         $lang = Factory::getLanguage()->getTag();
+
+        // Get the item id of the menu item for feedback redirection
+        $menuItemId = $this->getAccessibilityItemId();
+
+        //generate the url to pass it to the accessibility script
+        $url = Route::link("site", "index.php?Itemid={$menuItemId}");
 
         /**
         * Add strings for translations in Javascript.
