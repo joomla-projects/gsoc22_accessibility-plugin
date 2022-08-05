@@ -42,11 +42,11 @@ class PlgSystemAccessibility extends CMSPlugin
         $itemId = $this->params->get('feedback_redirection_link');
 
         if ($itemId > 0 && Associations::isEnabled()) {
-            $privacyAssociated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
+            $acc_Associated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
             $currentLang = Factory::getLanguage()->getTag();
 
-            if (isset($privacyAssociated[$currentLang])) {
-                $itemId = $privacyAssociated[$currentLang]->id;
+            if (isset($acc_Associated[$currentLang])) {
+                $itemId = $acc_Associated[$currentLang]->id;
             }
         }
 
