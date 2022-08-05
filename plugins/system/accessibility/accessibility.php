@@ -40,16 +40,32 @@ class PlgSystemAccessibility extends CMSPlugin
      *
      * @since   4.0.0
      */
-    private function getAccessibilityItemId()
+    private function getAccessibilityFeedbackItemId()
     {
         $itemId = $this->params->get('feedback_redirection_link');
 
         if ($itemId > 0 && Associations::isEnabled()) {
-            $acc_Associated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
+            $feedbackAssociated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
             $currentLang = Factory::getLanguage()->getTag();
 
-            if (isset($acc_Associated[$currentLang])) {
-                $itemId = $acc_Associated[$currentLang]->id;
+            if (isset($feedbackAssociated[$currentLang])) {
+                $itemId = $feedbackAssociated[$currentLang]->id;
+            }
+        }
+
+        return $itemId;
+    }
+    
+    private function getAccessibilityStatementItemId()
+    {
+        $itemId = $this->params->get('accessibility_statement');
+
+        if ($itemId > 0 && Associations::isEnabled()) {
+            $statementAssociated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
+            $currentLang = Factory::getLanguage()->getTag();
+
+            if (isset($statementAssociated[$currentLang])) {
+                $itemId = $statementAssociated[$currentLang]->id;
             }
         }
 
@@ -85,11 +101,13 @@ class PlgSystemAccessibility extends CMSPlugin
         // Detect the current active language
         $lang = Factory::getLanguage()->getTag();
 
-        // Get the item id of the menu item for feedback redirection
-        $menuItemId = $this->getAccessibilityItemId();
+        // Get the item id of the menu item for feedback redirection and accessibility statement
+        $feedbackMenuItemId = $this->getAccessibilityFeedbackItemId();
+        $statementMenuItemId = $this->getAccessibilityStatementItemId();
 
-        //generate the url to pass it to the accessibility script
-        $url = Route::link('site', 'index.php?Itemid={$menuItemId}');
+        //generate the urls to pass it to the accessibility script
+        $feedbackUrl = Route::link('site', 'index.php?Itemid='.$feedbackMenuItemId);
+        $statementUrl = Route::link('site', 'index.php?Itemid='.$statementMenuItemId);
 
         /**
         * Add strings for translations in Javascript.

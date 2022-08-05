@@ -54,6 +54,20 @@
 					>
 					<option value="">JOPTION_SELECT_MENU_ITEM</option>
 				</field>
+				<field
+					addfieldprefix="Joomla\Component\Menus\Administrator\Field"
+					name="accessibility_statement"
+					type="modal_menu"
+					label="PLG_SYSTEM_ACCESSIBILITY_STATEMENT"
+					description="PLG_SYSTEM_ACCESSIBILITY_STATEMENT_DESC"
+					disable="separator,alias,heading,url"
+					select="true"
+					new="true"
+					edit="true"
+					clear="true"
+					>
+					<option value="">JOPTION_SELECT_MENU_ITEM</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>
