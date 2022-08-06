@@ -106,8 +106,12 @@ class PlgSystemAccessibility extends CMSPlugin
         $statementMenuItemId = $this->getAccessibilityStatementItemId();
 
         //generate the urls to pass it to the accessibility script
-        $feedbackUrl = Route::link('site', 'index.php?Itemid='.$feedbackMenuItemId);
-        $statementUrl = Route::link('site', 'index.php?Itemid='.$statementMenuItemId);
+        $feedbackUrl = Route::link('site', 'index.php?Itemid=' . $feedbackMenuItemId);
+        $statementUrl = Route::link('site', 'index.php?Itemid=' . $statementMenuItemId);
+        if($feedbackMenuItemId) {
+            echo $feedbackMenuItemId;
+        }
+        // echo $feedbackUrl;
 
         /**
         * Add strings for translations in Javascript.
