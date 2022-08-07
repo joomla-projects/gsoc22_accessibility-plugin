@@ -60,6 +60,19 @@ class PlgSystemAccessibility extends CMSPlugin
 
         // Determine if it is an LTR or RTL language
         $direction = Factory::getLanguage()->isRtl() ? 'right' : 'left';
+        
+        //detect the position
+        $position = $this->params->get('position');
+
+        if($direction == 'right') {
+            if($position == 'top_right' || $position == 'bottom_right') {
+                $position = preg_replace('/_.*/', '', $position);
+                $position = $position . '_left';
+            } else {
+                $position = preg_replace('/_.*/', '', $position);
+                $position = $position . '_right';
+            }
+        }
 
         // Detect the current active language
         $lang = Factory::getLanguage()->getTag();
@@ -89,7 +102,11 @@ class PlgSystemAccessibility extends CMSPlugin
                 ],
                 'icon' => [
                     'position' => [
-                        $direction => [
+                        (($position == 'top_right') || ($position == 'top_left')) ? 'top' : 'bottom' => [
+                            'size' => '50',
+                            'units' => 'px',
+                        ],
+                        (($position == 'top_right') || ($position == 'bottom_right')) ? 'right' : 'left' => [
                             'size' => '0',
                             'units' => 'px',
                         ],
