@@ -11,8 +11,13 @@
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Associations;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Router\Route;
+
+
+
 
 /**
  * System plugin to add additional accessibility features to the administrator interface.
@@ -35,6 +40,38 @@ class PlgSystemAccessibility extends CMSPlugin
      *
      * @since   4.0.0
      */
+    private function getAccessibilityFeedbackItemId()
+    {
+        $itemId = $this->params->get('feedback_redirection_link');
+
+        if ($itemId > 0 && Associations::isEnabled()) {
+            $feedbackAssociated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
+            $currentLang = Factory::getLanguage()->getTag();
+
+            if (isset($feedbackAssociated[$currentLang])) {
+                $itemId = $feedbackAssociated[$currentLang]->id;
+            }
+        }
+
+        return $itemId;
+    }
+    
+    private function getAccessibilityStatementItemId()
+    {
+        $itemId = $this->params->get('accessibility_statement');
+
+        if ($itemId > 0 && Associations::isEnabled()) {
+            $statementAssociated = Associations::getAssociations('com_menus', '#__menu', 'com_menus.item', $itemId, 'id', '', '');
+            $currentLang = Factory::getLanguage()->getTag();
+
+            if (isset($statementAssociated[$currentLang])) {
+                $itemId = $statementAssociated[$currentLang]->id;
+            }
+        }
+
+        return $itemId;
+    }
+
     public function onBeforeCompileHead()
     {
         $section = $this->params->get('section', 'administrator');
@@ -64,6 +101,14 @@ class PlgSystemAccessibility extends CMSPlugin
         // Detect the current active language
         $lang = Factory::getLanguage()->getTag();
 
+        // Get the item id of the menu item for feedback redirection and accessibility statement
+        $feedbackMenuItemId = $this->getAccessibilityFeedbackItemId();
+        $statementMenuItemId = $this->getAccessibilityStatementItemId();
+
+        //generate the urls to pass it to the accessibility script
+        $feedbackUrl = Route::link('site', 'index.php?Itemid=' . $feedbackMenuItemId);
+        $statementUrl = Route::link('site', 'index.php?Itemid=' . $statementMenuItemId);
+        
         /**
         * Add strings for translations in Javascript.
         * Reference  https://ranbuch.github.io/accessibility/
@@ -99,6 +144,12 @@ class PlgSystemAccessibility extends CMSPlugin
                 'hotkeys' => [
                     'enabled' => true,
                     'helpTitles' => true,
+                ],
+                'statement' => [
+                    'url' => isset($feedbackMenuItemId) ? $statementUrl : ''
+                ],
+                'feedback' => [
+                    'url' => isset($statementMenuItemId) ? $feedbackUrl : ''
                 ],
                 'textToSpeechLang' => [$lang],
                 'speechToTextLang' => [$lang],
