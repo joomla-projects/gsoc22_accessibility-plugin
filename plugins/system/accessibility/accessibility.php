@@ -81,6 +81,8 @@ class PlgSystemAccessibility extends CMSPlugin
                     'decreaseText'        => Text::_('PLG_SYSTEM_ACCESSIBILITY_DECREASE_TEXT'),
                     'increaseTextSpacing' => Text::_('PLG_SYSTEM_ACCESSIBILITY_INCREASE_SPACING'),
                     'decreaseTextSpacing' => Text::_('PLG_SYSTEM_ACCESSIBILITY_DECREASE_SPACING'),
+                    'increaseLineHeight' => Text::_('PLG_SYSTEM_ACCESSIBILITY_INCREASE_LINEHEIGHT'),
+                    'decreaseLineHeight' => Text::_('PLG_SYSTEM_ACCESSIBILITY_DECREASE_LINEHEIGHT'),
                     'invertColors'        => Text::_('PLG_SYSTEM_ACCESSIBILITY_INVERT_COLORS'),
                     'grayHues'            => Text::_('PLG_SYSTEM_ACCESSIBILITY_GREY'),
                     'underlineLinks'      => Text::_('PLG_SYSTEM_ACCESSIBILITY_UNDERLINE'),
