@@ -86,6 +86,7 @@ class PlgSystemAccessibility extends CMSPlugin
                     'underlineLinks'      => Text::_('PLG_SYSTEM_ACCESSIBILITY_UNDERLINE'),
                     'bigCursor'           => Text::_('PLG_SYSTEM_ACCESSIBILITY_CURSOR'),
                     'readingGuide'        => Text::_('PLG_SYSTEM_ACCESSIBILITY_READING'),
+                    'pauseAnimations'     => Text::_('PLG_SYSTEM_ACCESSIBILITY_PAUSE_ANIMATIONS'),
                     'textToSpeech'        => Text::_('PLG_SYSTEM_ACCESSIBILITY_TTS'),
                     'speechToText'        => Text::_('PLG_SYSTEM_ACCESSIBILITY_STT'),
                     'resetTitle'          => Text::_('PLG_SYSTEM_ACCESSIBILITY_RESET'),
